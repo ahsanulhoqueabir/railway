@@ -31,7 +31,7 @@ export default PaymentOptions;
 const lists = [
   {
     name: "bKash",
-    image: "bkash.png",
+    image: "bkash.svg",
     folder: "payments",
   },
   {
@@ -41,17 +41,17 @@ const lists = [
   },
   {
     name: "Nagad",
-    image: "nagad.png",
+    image: "nagad.svg",
     folder: "payments",
   },
   {
     name: "visa",
-    image: "visa.png",
+    image: "visa.svg",
     folder: "payments",
   },
   {
     name: "master",
-    image: "master.png",
+    image: "master.svg",
     folder: "payments",
   },
   {
@@ -61,7 +61,7 @@ const lists = [
   },
   {
     name: "upay",
-    image: "upay.svg",
+    image: "upay.png",
     folder: "payments",
   },
 ];
