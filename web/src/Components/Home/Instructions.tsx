@@ -1,4 +1,4 @@
-import { FaAngleRight, FaCircleArrowRight } from "react-icons/fa6";
+import { FaAngleRight } from "react-icons/fa6";
 import getImage from "../../utilities/getimage";
 
 const Instructions = () => {

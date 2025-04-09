@@ -5,10 +5,14 @@ import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router/Router.jsx";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router}>
+const rootElement = document.getElementById("root");
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <RouterProvider router={router} />
       <App />
-    </RouterProvider>
-  </React.StrictMode>
-);
+    </React.StrictMode>
+  );
+} else {
+  console.error("Root element not found");
+}
