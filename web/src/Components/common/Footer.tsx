@@ -3,7 +3,7 @@ import getImage from "../../utilities/getimage";
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <footer className="footer border-t-[3.5px] border-green-500 p-10 bg-[#f6f9ff] items-center justify-between px-5 lg:px-20">
+    <footer className="flex justify-between items-center border-t-[3.5px] border-green-500 p-10 bg-[#f6f9ff]  px-5 lg:px-20">
       <nav>
         <p>
           &copy; {year} <span className="font-bold">Ahsanul Hoque</span>. All

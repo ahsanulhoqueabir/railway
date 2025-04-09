@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import getImage from "../../utilities/getimage";
+// import getImage from "../../utilities/getimage";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays } from "date-fns";
+import getImage from "@/utilities/getimage";
 
 const SearchSection = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -21,7 +22,7 @@ const SearchSection = () => {
     }
   }, [data]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(data);
   };
@@ -30,7 +31,7 @@ const SearchSection = () => {
       <div className="lg:w-[55%]">
         <form onSubmit={handleSubmit} className="">
           <div className="grid lg:grid-cols-2 gap-6">
-            <label className="form-control w-full ">
+            <label className="form-control ">
               <div className="label">
                 <span className="label-text font-medium">From</span>
               </div>
@@ -40,14 +41,13 @@ const SearchSection = () => {
                 onChange={(e) => {
                   if (e.target.value !== "") {
                     setData({ ...data, from: e.target.value });
-                  } else {
                   }
                 }}
                 placeholder="From Station"
-                className="input h-9 rounded input-bordered focus:border-none focus:outline-none focus:shadow-sm focus:shadow-green-500 w-full "
+                className="searchinput"
               />
             </label>
-            <label className="form-control w-full ">
+            <label className="form-control  ">
               <div className="label">
                 <span className="label-text font-medium">To</span>
               </div>
@@ -58,29 +58,32 @@ const SearchSection = () => {
                   if (e.target.value !== "") {
                     setData({ ...data, to: e.target.value });
                   } else {
+                    setData({ ...data, to: "" });
                   }
                 }}
                 placeholder="To Station"
-                className="input h-9 rounded input-bordered focus:border-none focus:outline-none focus:shadow-sm focus:shadow-green-500 w-full "
+                className="searchinput"
               />
             </label>
-            <label className="form-control w-full ">
-              <div className="label">
+            <label className=" flex flex-col gap-0">
+              <div className="label mb-1">
                 <span className="label-text font-medium">Date of Journey</span>
               </div>
               <DatePicker
                 selected={startDate}
                 onChange={(date) => {
-                  setData({ ...data, date: date });
-                  setStartDate(date);
+                  if (date) {
+                    setData({ ...data, date: date.toISOString() });
+                    setStartDate(date);
+                  }
                 }}
                 minDate={new Date()}
                 maxDate={addDays(new Date(), 9)}
                 placeholderText="Journey Date"
-                className="input h-9 rounded input-bordered focus:border-none focus:outline-none focus:shadow-sm focus:shadow-green-500 w-full  "
+                className="searchinput"
               />
             </label>
-            <label className="form-control w-full ">
+            <label className="form-control ">
               <div className="label">
                 <span className="label-text font-medium">Choose Class</span>
               </div>
@@ -90,9 +93,10 @@ const SearchSection = () => {
                   if (e.target.value !== "") {
                     setData({ ...data, class: e.target.value });
                   } else {
+                    setData({ ...data, class: "" });
                   }
                 }}
-                className="input  h-9 rounded input-bordered focus:border-none focus:outline-none focus:shadow-sm focus:shadow-green-500 w-full"
+                className="searchinput"
                 defaultValue=""
               >
                 <option value="" disabled>

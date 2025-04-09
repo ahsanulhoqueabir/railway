@@ -1,4 +1,4 @@
-const getImage = (path, name) => {
+const getImage = (path: string, name: string) => {
   return new URL(`../assets/${path}/${name}`, import.meta.url).href;
 };
 

@@ -38,7 +38,7 @@ const Navbar = () => {
       }`}
     >
       <div className="flex-1">
-        <Link className="flex items-center">
+        <Link to={"/"} className="flex items-center">
           <img
             src={getImage("common", "logo.png")}
             alt=""
@@ -62,7 +62,12 @@ const Navbar = () => {
 
 export default Navbar;
 
-const EachItem = ({ item }) => {
+interface ItemProps {
+  name: string;
+  path: string;
+}
+
+const EachItem = ({ item }: { item: ItemProps }) => {
   const { name, path } = item;
 
   return (
@@ -70,7 +75,7 @@ const EachItem = ({ item }) => {
       onClick={() => setTitle(name)}
       to={path}
       className={({ isActive }) =>
-        `hover:shadow-mmd hover:shadow-green-700 px-4 py-2 text-lg bg-transparent transition-shadow duration-300 hover:border-b-2 border-b-2 border-transparent hover:border-green-500 ${
+        ` px-4 py-2 text-lg bg-transparent transition-all duration-300 hover:border-b-2  border-b-2 border-transparent hover:border-green-500 ${
           isActive ? "border-b-2 border-green-500" : ""
         }`
       }

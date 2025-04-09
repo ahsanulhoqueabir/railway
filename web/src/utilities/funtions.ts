@@ -1,4 +1,4 @@
-const setTitle = (name) => {
+const setTitle = (name: string) => {
   document.title = `${name} |  Bangladesh Railway`;
 };
 
