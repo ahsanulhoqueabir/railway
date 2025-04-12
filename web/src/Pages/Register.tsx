@@ -1,6 +1,10 @@
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 import animationData from "@/assets/animation/raill.json";
+import { useState } from "react";
+import useAxiosPublic from "@/Hooks/axios/useAxiosPublic";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationPage = () => {
   const {
@@ -8,25 +12,43 @@ const RegistrationPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [loading, setLoading] = useState(false);
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const onSubmit = (data: Record<string, unknown>) => {
-    console.log(data);
+    setLoading(true);
+    axiosPublic
+      .post("/user/registration", data)
+      .then((response) => {
+        if (response.status === 201) {
+          toast.success("Registration successful");
+          setLoading(false);
+          navigate("/login");
+        }
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          toast.error("User already exists");
+        }
+        setLoading(false);
+      });
   };
 
   return (
-    <div className="relative w-full h-screen flex justify-center items-center overflow-hidden">
+    <div className="relative w-full min-h-screen flex justify-center items-center overflow-hidden">
       {/* Background Animation */}
       <Lottie
         animationData={animationData}
         // loop={true}
         className="absolute inset-0 w-full h-full"
       />
-      <div className="flex items-center justify-center relative z-10 bg-white bg-opacity-90 rounded-lg shadow-xl max-w-[350px] w-full flex-col ">
-        <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-6">
+      <div className="my-10 h-full p-1  bg-linear-to-r/increasing from-indigo-500 to-teal-400 flex items-center justify-center relative z-10 bg-white bg-opacity-90 rounded-lg shadow-xl lg:w-[460px] flex-col ">
+        <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-6 ">
           <h2 className="text-center text-2xl font-bold text-gray-700 mb-4">
             Register
           </h2>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
             <div>
               <label className="block text-gray-600 mb-1">Name</label>
               <input
@@ -100,9 +122,12 @@ const RegistrationPage = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-2 rounded-lg"
+              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-2 rounded-lg flex items-center justify-center"
             >
-              Register
+              <span className={`${loading ? "hidden" : ""}`}>Register</span>
+              {loading && (
+                <span className="ml-2 animate-spin rounded-full h-5 w-5 border-t-2 border-white border-solid"></span>
+              )}
             </button>
           </form>
         </div>

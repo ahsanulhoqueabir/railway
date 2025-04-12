@@ -3,6 +3,7 @@ dotenv.config();
 import express from "express";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
+import pool from "../config/db.js";
 
 const router = express.Router();
 
@@ -13,6 +14,22 @@ router.post("/jwt", (req, res) => {
     expiresIn: "30d",
   });
   res.send({ token });
+});
+router.post("/verify", async (req, res) => {
+  const token = req.body.token;
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, user) => {
+    if (err) return res.sendStatus(403);
+    const id = user.id;
+    const [rows] = await pool.execute("SELECT * FROM user WHERE id = ?", [id]);
+    const data = {
+      id: rows[0].id,
+      name: rows[0].name,
+      email: rows[0].email,
+      phone: rows[0].phone,
+    };
+
+    res.send(data);
+  });
 });
 router.get("/generate-signature", async (req, res) => {
   const timestamp = Math.floor(Date.now() / 1000);
@@ -25,5 +42,4 @@ router.get("/generate-signature", async (req, res) => {
   res.send({ signature: result, timestamp });
 });
 
-// module.exports = router;
 export default router;

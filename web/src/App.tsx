@@ -9,6 +9,7 @@ const App = () => {
       <div className="min-h-screen lg:px-20 px-5">
         <Outlet />
       </div>
+
       <Footer />
     </div>
   );

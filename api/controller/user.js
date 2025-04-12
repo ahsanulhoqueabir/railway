@@ -8,8 +8,8 @@ const createUser = async (req, res) => {
     const hashedPassword = await hassPassword(password);
     // Check if the user already exists
     const existingUser = await pool.query(
-      "SELECT * FROM user WHERE email = ?",
-      [email]
+      "SELECT * FROM user WHERE email = ? or phone = ?",
+      [email, phone]
     );
     if (existingUser[0].length > 0) {
       res.status(400).json({ error: "User already exists" });
@@ -23,6 +23,8 @@ const createUser = async (req, res) => {
         phone VARCHAR(255) NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
+        image VARCHAR(255) DEFAULT NULL,
+        is_admin BOOLEAN DEFAULT FALSE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
