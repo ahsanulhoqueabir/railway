@@ -9,6 +9,7 @@ import Contact from "@/Pages/Contact";
 import Profile from "@/Pages/Profile";
 import PurchaseHistory from "@/Pages/PurchaseHistory";
 import VerifyTicket from "@/Pages/VerifyTicket";
+import adminRoute from "@/router/AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -46,7 +47,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
-
+  ...adminRoute,
   {
     path: "*",
     element: <ErrorPage />,

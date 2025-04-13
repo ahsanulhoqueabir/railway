@@ -16,10 +16,11 @@ import GetIcon from "@/utilities/getIcon";
 import { FaMobileAlt, FaSignOutAlt } from "react-icons/fa";
 import { FaRegEnvelope } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import LoadingPage from "@/Pages/LoadingPage";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { user, setUser } = useAuth();
+  const { user, setUser, loading } = useAuth();
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -83,6 +84,9 @@ const Navbar = () => {
     toast.success("Logout successful");
     setUser(null);
   };
+  if (loading) {
+    return <LoadingPage />;
+  }
   return (
     <div
       className={`navbar z-50 lg:px-24 shadow-md lg:sticky top-0 ${
@@ -132,6 +136,15 @@ const Navbar = () => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
+                  <DropdownMenuItem>
+                    <Link
+                      to={"/admin-panel"}
+                      className="flex items-center gap-2"
+                    >
+                      <GetIcon className="" icon="FaUserShield" lib="fa" />
+                      <span className="text-sm">Admin Panel</span>
+                    </Link>
+                  </DropdownMenuItem>
                   {profiles.map((i, ind) => {
                     return (
                       <DropdownMenuItem key={ind}>
