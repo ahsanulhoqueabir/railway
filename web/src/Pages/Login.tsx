@@ -27,9 +27,8 @@ const Login = () => {
       })
       .then((response) => {
         if (response.status === 200) {
-          const token = response.data.token;
+          const { token, user } = response.data;
           localStorage.setItem("railbd-token", token);
-          const user = response.data.user;
           setUser(user);
           toast("Login successful");
           setLoading(false);

@@ -1,13 +1,10 @@
 import * as React from "react";
 import {
-  BookOpen,
-  Bot,
   Frame,
-  Map,
   PieChart,
-  Settings2,
   SquareTerminal,
   TramFront,
+  Waypoints,
 } from "lucide-react";
 
 import { NavMain } from "@/Components/nav-main";
@@ -20,7 +17,7 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar";
+} from "@/Components/ui/sidebar";
 import useAuth from "@/Hooks/useAuth";
 
 const data = {
@@ -39,100 +36,65 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Add Train",
+          url: "add-train",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Edit Train",
+          url: "edit-train",
         },
         {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
+          title: "Train List",
+          url: "train-list",
         },
         {
-          title: "Explorer",
-          url: "#",
+          title: "Train Details",
+          url: "train-details",
         },
         {
-          title: "Quantum",
-          url: "#",
+          title: "Train Schedule",
+          url: "train-schedule",
         },
       ],
     },
     {
-      title: "Documentation",
+      title: "Manage Stations",
       url: "#",
-      icon: BookOpen,
+      icon: Waypoints,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: "Add Station",
+          url: "add-station",
         },
         {
-          title: "Get Started",
-          url: "#",
+          title: "Edit Station",
+          url: "edit-station",
         },
         {
-          title: "Tutorials",
-          url: "#",
+          title: "Station List",
+          url: "station-list",
         },
         {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
+          title: "Station Details",
+          url: "station-details",
         },
         {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
+          title: "Station Schedule",
+          url: "station-schedule",
         },
       ],
     },
   ],
   projects: [
     {
-      name: "Design Engineering",
-      url: "#",
+      name: "Add User",
+      url: "add-user",
       icon: Frame,
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
+      name: "Manage User",
+      url: "manage-user",
       icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
     },
   ],
 };
@@ -142,7 +104,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const userdata = {
     name: user?.name || "Unknown User",
     email: user?.email || "unknown@example.com",
-    avatar: "https://placehold.co/400x400",
+    avatar: "https://avatar.iran.liara.run/public",
   };
   return (
     <Sidebar collapsible="icon" {...props}>

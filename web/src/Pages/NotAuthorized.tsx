@@ -1,15 +1,10 @@
 import Lottie from "lottie-react";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import anim from "@/assets/animation/Not-Authorized.json";
 
 const NotAuthorized = () => {
   const navigate = useNavigate();
-  useEffect(() => {
-    setTimeout(() => {
-      navigate("/");
-    }, 2500);
-  });
+
   return (
     <div className="min-h-[calc(100vh-250px)]">
       <div className=" mx-auto relative">

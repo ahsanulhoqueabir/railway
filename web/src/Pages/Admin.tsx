@@ -4,17 +4,22 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
 } from "@/Components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/Components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from "@/Components/ui/sidebar";
+import useAuth from "@/Hooks/useAuth";
+import LoadingPage from "./LoadingPage";
 
 const Admin = () => {
+  const { loading } = useAuth();
+
+  if (loading) {
+    return <LoadingPage />;
+  }
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -26,14 +31,12 @@ const Admin = () => {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
-                  </BreadcrumbLink>
+                  <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
+                {/* <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
                   <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
+                </BreadcrumbItem> */}
               </BreadcrumbList>
             </Breadcrumb>
           </div>
