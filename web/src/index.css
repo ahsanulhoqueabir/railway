@@ -1,6 +1,45 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: teal;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: aquamarine;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4caf50;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #388e3c;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #4caf50;
+}
+
+::-webkit-scrollbar-button {
+  background-color: #4caf50;
+}
+
+::-webkit-scrollbar-corner:hover {
+  background-color: #388e3c;
+}
+
+::-webkit-scrollbar-button:hover {
+  background-color: #388e3c;
+}
+
+
+
 @custom-variant dark (&:is(.dark *));
 @plugin "daisyui";
 
@@ -15,6 +54,10 @@
 .react-datepicker .react-datepicker__header {
   background-color: #4caf50 !important;
   color: white !important;
+}
+
+.gradbg {
+  @apply bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%
 }
 
 :root {
@@ -42,7 +85,7 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
+  --sidebar: oklch(0.96 0.0158 154.46);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
@@ -84,6 +127,10 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+@theme {
+  --color-sidebar: var(--sidebar);
 }
 
 @theme inline {

@@ -10,6 +10,9 @@ import Profile from "@/Pages/Profile";
 import PurchaseHistory from "@/Pages/PurchaseHistory";
 import VerifyTicket from "@/Pages/VerifyTicket";
 import adminRoute from "@/router/AdminRoute";
+import Admin from "@/Pages/Admin";
+import AddTrain from "@/Pages/admin/AddTrain";
+import AddStation from "@/Pages/admin/AddStation";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +47,25 @@ export const router = createBrowserRouter([
       {
         path: "verify-ticket",
         element: <VerifyTicket />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "",
+        element: <div>Admin Page</div>,
+      },
+      {
+        path: "add-station",
+        element: <AddStation />,
+      },
+      {
+        path: "add-train",
+        element: <AddTrain />,
       },
     ],
   },

@@ -4,15 +4,15 @@ import { generateID } from "../utility/functions.js";
 
 const createStation = async (req, res) => {
   try {
-    const { name, longitude, latitude, capacity, mastername } = req.body;
+    const { name, longitude, latitude, station_code, mastername } = req.body;
     // Ensure the table exists
     await pool.query(`
         CREATE TABLE IF NOT EXISTS station (
             id VARCHAR(17) PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
-            longitude FLOAT NOT NULL,
-            latitude FLOAT NOT NULL,
-            capacity INT NOT NULL,
+            longitude NUMERIC(10,7) NOT NULL,
+            latitude NUMERIC(10,7) NOT NULL,
+            station_code VARCHAR(10) UNIQUE NOT NULL,
             is_available BOOLEAN DEFAULT TRUE,
             image VARCHAR(255) DEFAULT NULL,
             station_master_name VARCHAR(255) DEFAULT NULL,
@@ -20,10 +20,20 @@ const createStation = async (req, res) => {
         )
         `);
     const id = generateID();
+
+    const isExists = await pool.query(
+      "SELECT * FROM station WHERE name = ? OR station_code = ?",
+      [name, station_code]
+    );
+    if (isExists[0].length > 0) {
+      return res.status(409).json({
+        message: "Station with this name or station code already exists",
+      });
+    }
     // Insert the station
     const station = await pool.query(
-      "INSERT INTO station (id, name, longitude, latitude, capacity,station_master_name) VALUES (?, ?, ?, ?, ?, ?)",
-      [id, name, longitude, latitude, capacity, mastername]
+      "INSERT INTO station (id, name, longitude, latitude, station_code,station_master_name) VALUES (?, ?, ?, ?, ?, ?)",
+      [id, name, longitude, latitude, station_code, mastername]
     );
 
     return res.status(201).json(station);
@@ -60,10 +70,10 @@ const getStationById = async (req, res) => {
 const updateStationById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, longitude, latitude, capacity, mastername } = req.body;
+    const { name, longitude, latitude, station_code, mastername } = req.body;
     const station = await pool.query(
-      "UPDATE station SET name = ?, longitude = ?, latitude = ?, capacity = ?, station_master_name = ? WHERE id = ?",
-      [name, longitude, latitude, capacity, mastername, id]
+      "UPDATE station SET name = ?, longitude = ?, latitude = ?, station_code = ?, station_master_name = ? WHERE id = ?",
+      [name, longitude, latitude, station_code, mastername, id]
     );
     if (station[0].affectedRows === 0) {
       return res.status(404).json({ message: "Station not found" });
@@ -140,13 +150,13 @@ const getStationsByName = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
-// Get all stations with a specific capacity
-const getStationsByCapacity = async (req, res) => {
+// Get all stations with a specific station_code
+const getStationsBystation_code = async (req, res) => {
   try {
-    const { capacity } = req.params;
+    const { station_code } = req.params;
     const stations = await pool.query(
-      "SELECT * FROM station WHERE capacity = ?",
-      [capacity]
+      "SELECT * FROM station WHERE station_code = ?",
+      [station_code]
     );
     if (stations[0].length === 0) {
       return res.status(404).json({ message: "No stations found" });
@@ -167,5 +177,5 @@ export {
   getUnavailableStations,
   getStationsByMasterName,
   getStationsByName,
-  getStationsByCapacity,
+  getStationsBystation_code,
 };

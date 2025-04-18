@@ -137,10 +137,7 @@ const Navbar = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
-                    <Link
-                      to={"/admin-panel"}
-                      className="flex items-center gap-2"
-                    >
+                    <Link to={"/admin"} className="flex items-center gap-2">
                       <GetIcon className="" icon="FaUserShield" lib="fa" />
                       <span className="text-sm">Admin Panel</span>
                     </Link>

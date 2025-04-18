@@ -37,23 +37,19 @@ const data = {
       items: [
         {
           title: "Add Train",
-          url: "add-train",
-        },
-        {
-          title: "Edit Train",
-          url: "edit-train",
+          url: "/admin/add-train",
         },
         {
           title: "Train List",
-          url: "train-list",
+          url: "/admin/train-list",
         },
         {
           title: "Train Details",
-          url: "train-details",
+          url: "/admin/train-details",
         },
         {
           title: "Train Schedule",
-          url: "train-schedule",
+          url: "/admin/train-schedule",
         },
       ],
     },
@@ -64,23 +60,19 @@ const data = {
       items: [
         {
           title: "Add Station",
-          url: "add-station",
-        },
-        {
-          title: "Edit Station",
-          url: "edit-station",
+          url: "/admin/add-station",
         },
         {
           title: "Station List",
-          url: "station-list",
+          url: "/admin/station-list",
         },
         {
           title: "Station Details",
-          url: "station-details",
+          url: "/admin/station-details",
         },
         {
           title: "Station Schedule",
-          url: "station-schedule",
+          url: "/admin/station-schedule",
         },
       ],
     },
@@ -88,12 +80,12 @@ const data = {
   projects: [
     {
       name: "Add User",
-      url: "add-user",
+      url: "/admin/add-user",
       icon: Frame,
     },
     {
       name: "Manage User",
-      url: "manage-user",
+      url: "/admin/manage-user",
       icon: PieChart,
     },
   ],
@@ -107,7 +99,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     avatar: "https://avatar.iran.liara.run/public",
   };
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar
+      className="bg-cyan-500  border-green-700"
+      collapsible="icon"
+      {...props}
+    >
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
