@@ -40,7 +40,6 @@ const RegistrationPage = () => {
       {/* Background Animation */}
       <Lottie
         animationData={animationData}
-        // loop={true}
         className="absolute inset-0 w-full h-full"
       />
       <div className="my-10 h-full p-1  bg-linear-to-r/increasing from-indigo-500 to-teal-400 flex items-center justify-center relative z-10 bg-white bg-opacity-90 rounded-lg shadow-xl lg:w-[460px] flex-col ">
@@ -106,7 +105,7 @@ const RegistrationPage = () => {
                   },
                   pattern: {
                     value:
-                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
                     message:
                       "Password must include uppercase, lowercase, number, and special character",
                   },

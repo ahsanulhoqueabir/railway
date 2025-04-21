@@ -29,7 +29,7 @@ const Admin = () => {
             <BreadCrumbCom />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4  bg-sidebar">
+        <div className="flex flex-1 flex-col gap-4  bg-sidebar px-4">
           <Outlet />
         </div>
       </SidebarInset>

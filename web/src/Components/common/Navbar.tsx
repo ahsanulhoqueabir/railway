@@ -17,9 +17,11 @@ import { FaMobileAlt, FaSignOutAlt } from "react-icons/fa";
 import { FaRegEnvelope } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import LoadingPage from "@/Pages/LoadingPage";
+import { admin } from "@/assets/data/admins";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const { user, setUser, loading } = useAuth();
 
   const handleScroll = () => {
@@ -36,6 +38,14 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      setIsAdmin(admin.includes(user?.email) ? true : false);
+    } else {
+      setIsAdmin(false);
+    }
+  }, [user]);
 
   const paths = [
     { path: "/", name: "Home" },
@@ -136,12 +146,15 @@ const Navbar = () => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem>
-                    <Link to={"/admin"} className="flex items-center gap-2">
-                      <GetIcon className="" icon="FaUserShield" lib="fa" />
-                      <span className="text-sm">Admin Panel</span>
-                    </Link>
-                  </DropdownMenuItem>
+                  {isAdmin && (
+                    <DropdownMenuItem>
+                      <Link to={"/admin"} className="flex items-center gap-2">
+                        <GetIcon className="" icon="FaUserShield" lib="fa" />
+                        <span className="text-sm">Admin Panel</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
+
                   {profiles.map((i, ind) => {
                     return (
                       <DropdownMenuItem key={ind}>

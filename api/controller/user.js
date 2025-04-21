@@ -49,5 +49,34 @@ const getUser = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+const updatePassword = async (req, res) => {
+  try {
+    const { password, newPassword, email } = req.body;
 
-export { createUser, getUser };
+    const hashedPassword = await hassPassword(newPassword);
+    const user = await pool.query(
+      "UPDATE user SET password = ? WHERE email = ?",
+      [hashedPassword, email]
+    );
+    if (user[0].affectedRows === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    return res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+const deleteUser = async (req, res) => {
+  try {
+    const { email } = req.params;
+    const user = await pool.query("DELETE FROM user WHERE email = ?", [email]);
+    if (user[0].affectedRows === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    return res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export { createUser, getUser, updatePassword, deleteUser };

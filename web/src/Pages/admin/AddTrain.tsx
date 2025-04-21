@@ -11,7 +11,7 @@ type FormValues = {
   name: string;
   start_station: string | null;
   end_station: string | null;
-  coach_no: number;
+  couch_no: number;
   departure_time: string; //time format "14:30"
   arrival_time: string;
   train_number: string;
@@ -61,7 +61,7 @@ export default function AddTrain() {
                 { label: "Name", name: "name" },
                 { label: "Start Station", name: "start_station" },
                 { label: "End Station", name: "end_station" },
-                { label: "Coach No", name: "coach_no" },
+                { label: "couch No", name: "couch_no" },
                 { label: "Departure Time", name: "departure_time" },
                 { label: "Arrival Time", name: "arrival_time" },
                 { label: "Train Number", name: "train_number" },
@@ -84,7 +84,7 @@ export default function AddTrain() {
                         field.name === "departure_time" ||
                         field.name === "arrival_time"
                           ? "time"
-                          : field.name === "coach_no" ||
+                          : field.name === "couch_no" ||
                             field.name === "off_day"
                           ? "number"
                           : "text"

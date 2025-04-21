@@ -31,8 +31,8 @@ const Login = () => {
           localStorage.setItem("railbd-token", token);
           setUser(user);
           toast("Login successful");
-          setLoading(false);
           naviage("/");
+          setLoading(false);
         } else {
           console.error("Login failed:");
           setLoading(false);

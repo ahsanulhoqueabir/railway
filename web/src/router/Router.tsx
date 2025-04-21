@@ -13,6 +13,10 @@ import adminRoute from "@/router/AdminRoute";
 import Admin from "@/Pages/Admin";
 import AddTrain from "@/Pages/admin/AddTrain";
 import AddStation from "@/Pages/admin/AddStation";
+import TrainList from "@/Pages/admin/TrainList";
+import TrainDetails from "@/Pages/admin/TrainDetails";
+import SearchTrain from "@/Pages/SearchTrain";
+import ChangePassword from "@/Pages/profile/ChangePassword";
 
 export const router = createBrowserRouter([
   {
@@ -33,12 +37,24 @@ export const router = createBrowserRouter([
         element: <TrainInformation />,
       },
       {
+        path: "train-information/:id",
+        element: <TrainInformation />,
+      },
+      {
         path: "contact-us",
         element: <Contact />,
       },
       {
         path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "profile/change-password",
+        element: <ChangePassword />,
+      },
+      {
+        path: "search-trains",
+        element: <SearchTrain />,
       },
       {
         path: "purchase-history",
@@ -66,6 +82,14 @@ export const router = createBrowserRouter([
       {
         path: "add-train",
         element: <AddTrain />,
+      },
+      {
+        path: "train-list",
+        element: <TrainList />,
+      },
+      {
+        path: "train-detail/:id",
+        element: <TrainDetails />,
       },
     ],
   },

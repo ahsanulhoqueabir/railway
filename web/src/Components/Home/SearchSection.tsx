@@ -4,11 +4,14 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays } from "date-fns";
 import getImage from "@/utilities/getimage";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const SearchSection = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [data, setData] = useState({ from: "", to: "", date: "", class: "" });
   const [isTrue, setTrue] = useState(true);
+  const navigate = useNavigate();
   useEffect(() => {
     if (
       data.from !== "" &&
@@ -24,7 +27,14 @@ const SearchSection = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(data);
+    const fd = {
+      from: data.from,
+      to: data.to,
+      date: new Date(data.date).toISOString().split("T")[0],
+      class: data.class,
+    };
+    console.log(fd);
+    navigate(`/search-trains?from=${fd.from}&to=${fd.to}&doj=${fd.date}`);
   };
   return (
     <section className="lg:flex justify-between gap-16 py-10 items-center">
@@ -102,17 +112,26 @@ const SearchSection = () => {
                 <option value="" disabled>
                   Select Class
                 </option>
-                <option value="AC_S">AC_S</option>
+                <option value="Sleeper">Sleeper</option>
                 <option value="Snigdha">Snigdha</option>
                 <option value="Shovon">Shovon</option>
-
-                <option value="S_Chair">S_Chair</option>
               </select>
             </label>
           </div>
-          <button disabled={!isTrue} className="btn my-5 btn-primary w-full">
-            Search
-          </button>
+          <motion.div
+            whileFocus={{ scale: 1.02 }}
+            whileHover={{ scale: 1.01 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="space-y-1"
+          >
+            <button
+              onSubmit={() => handleSubmit}
+              disabled={!isTrue}
+              className="btn my-5 text-white border-none w-full bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%"
+            >
+              Search
+            </button>
+          </motion.div>
         </form>
       </div>
       <div className="lg:w-[45%]">
